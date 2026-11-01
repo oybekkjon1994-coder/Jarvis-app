@@ -97,6 +97,8 @@ def olx_ok(o):
 
 
 def check_olx(st, feed):
+    if not CFG.get("olx_enabled", True):
+        return
     seen = set(st.get("seen", []))
     done = set(st.get("queries_done", []))
     for q in CFG.get("olx_queries", []):
@@ -106,6 +108,9 @@ def check_olx(st, feed):
             offers = get_json(url).get("data", [])
         except Exception as e:
             errors.append(f"olx '{q}': {e}")
+            if "403" in str(e):  # OLX GitHub serverlarini bloklagan: qolgan so'zlarni urinmaymiz
+                errors.append("olx: 403 — bu muhitdan bloklangan, olx_enabled=false qiling")
+                break
             continue
         for o in offers:
             oid = str(o.get("id"))

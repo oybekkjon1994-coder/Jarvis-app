@@ -1,5 +1,6 @@
 {
   "usd_change_percent": 0.5,
+  "olx_enabled": false,
   "olx_queries": ["lazer kesish kerak", "darvoza kerak", "metall konstruksiya kerak", "listogib kerak"],
   "olx_max_age_days": 7,
   "olx_exclude_types": ["job"],
