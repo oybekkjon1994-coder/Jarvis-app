@@ -74,13 +74,8 @@
   }
  ],
  "usd": 11991.42,
- "updated": "2026-11-01 10:15",
- "errors": [
-  "olx 'lazer kesish kerak': HTTP Error 403: Forbidden",
-  "olx 'darvoza kerak': HTTP Error 403: Forbidden",
-  "olx 'metall konstruksiya kerak': HTTP Error 403: Forbidden",
-  "olx 'listogib kerak': HTTP Error 403: Forbidden"
- ],
+ "updated": "2026-11-01 11:04",
+ "errors": [],
  "watching": {
   "olx": [
    "lazer kesish kerak",
