@@ -34,10 +34,15 @@ def load_state():
 
 
 def check_usd(st):
-    try:
-        rate = float(get_json("https://cbu.uz/oz/arkhiv-kursov-valyut/json/USD/")[0]["Rate"])
-    except Exception as e:
-        print("USD xato:", e); return
+    rate = None
+    for fn in (lambda: float(get_json("https://cbu.uz/oz/arkhiv-kursov-valyut/json/USD/")[0]["Rate"]),
+               lambda: float(get_json("https://open.er-api.com/v6/latest/USD")["rates"]["UZS"])):
+        try:
+            rate = fn(); break
+        except Exception as e:
+            print("USD xato:", e)
+    if rate is None:
+        return
     old = st.get("usd")
     thr = CFG.get("usd_change_percent", 0.5)
     if old and abs(rate - old) / old * 100 >= thr:
