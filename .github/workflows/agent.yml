@@ -5,6 +5,9 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+concurrency:
+  group: jarvis
+  cancel-in-progress: false
 jobs:
   run:
     runs-on: ubuntu-latest
@@ -18,5 +21,5 @@ jobs:
         run: |
           git config user.name "jarvis-agent"
           git config user.email "agent@users.noreply.github.com"
-          git add agent/state.json
-          git diff --cached --quiet || (git commit -m "agent: holat yangilandi" && git push)
+          git add agent/state.json agent/feed.json
+          git diff --cached --quiet || (git commit -m "agent: holat yangilandi" && git pull --rebase -q && git push)
